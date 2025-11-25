@@ -1,0 +1,21 @@
+config {
+  type: "table",
+  type: "table",
+  schema: "final_dataset",
+  name: "stocke_market_daily_data",
+  tags: ["finance", "clean"]
+}
+
+SELECT
+  CAST(`date` AS DATE) AS trade_date,
+  `symbol`,
+  SAFE_CAST(`open` AS FLOAT64) AS open_price,
+  SAFE_CAST(`high` AS FLOAT64) AS high_price,
+  SAFE_CAST(`low` AS FLOAT64) AS low_price,
+  SAFE_CAST(`close` AS FLOAT64) AS close_price,
+  SAFE_CAST(`volume` AS INT64) AS volume,
+  CURRENT_TIMESTAMP() AS ingested_at
+FROM
+  `{{ params.project_id }}.stage.stock_market_daily_data`
+ORDER BY
+  trade_date DESC;
