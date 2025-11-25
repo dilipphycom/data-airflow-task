@@ -1,2 +1,4 @@
 secrets/*.json
 *.json
+logs/*
+dags/__pycache__/*
